@@ -1,0 +1,134 @@
+/* ====== COLORES ====== */
+:root {
+  /* Paleta Principal */
+  --cream: #f5f0e8;
+  --sand: #e8dece;
+  --sage: #8a9e8c;
+  --sage-d: #5e7360;
+  --taupe: #b5a090;
+  --ink: #2c2420;
+  --mist: #d4cfc8;
+  
+  /* Variantes */
+  --light-sand: #f0e8dd;
+  --white: #ffffff;
+  --black: #000000;
+  
+  /* Bootstrap overrides */
+  --bs-body-bg: var(--cream);
+  --bs-body-color: var(--ink);
+  --bs-border-color: var(--mist);
+  --bs-secondary-color: var(--sage);
+}
+
+/* ====== TIPOGRAFÍA ====== */
+:root {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Jost", sans-serif;
+  
+  /* Tamaños base */
+  --fs-base: 1rem;
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.75rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.5rem;
+  --fs-3xl: 1.875rem;
+  --fs-4xl: 2.25rem;
+  --fs-5xl: 3rem;
+  --fs-6xl: 3.75rem;
+  
+  /* Line heights */
+  --lh-tight: 1.2;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.6;
+  --lh-loose: 1.8;
+  
+  /* Letter spacing */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;
+  --ls-wider: 0.1em;
+  --ls-widest: 0.15em;
+}
+
+/* ====== UTILITIES GLOBALES ====== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: var(--lh-relaxed);
+}
+
+/* Font families */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Text utilities */
+.text-sage {
+  color: var(--sage);
+}
+
+.text-sage-d {
+  color: var(--sage-d);
+}
+
+.text-taupe {
+  color: var(--taupe);
+}
+
+.text-ink {
+  color: var(--ink);
+}
+
+.bg-sand {
+  background-color: var(--sand);
+}
+
+.bg-cream {
+  background-color: var(--cream);
+}
+
+.bg-light-sand {
+  background-color: var(--light-sand);
+}
+
+.border-mist {
+  border-color: var(--mist) !important;
+}
+
+/* Opacidades */
+.opacity-45 {
+  opacity: 0.45;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+
+.opacity-70 {
+  opacity: 0.7;
+}
+
+.opacity-75 {
+  opacity: 0.75;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+.opacity-85 {
+  opacity: 0.85;
+}
