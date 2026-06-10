@@ -8,12 +8,12 @@
   --taupe: #b5a090;
   --ink: #2c2420;
   --mist: #d4cfc8;
-  
+
   /* Variantes */
   --light-sand: #f0e8dd;
   --white: #ffffff;
   --black: #000000;
-  
+
   /* Bootstrap overrides */
   --bs-body-bg: var(--cream);
   --bs-body-color: var(--ink);
@@ -23,9 +23,9 @@
 
 /* ====== TIPOGRAFÍA ====== */
 :root {
-  --font-serif: "Cormorant Garamond", serif;
-  --font-sans: "Jost", sans-serif;
-  
+  --f-serif: "Cormorant Garamond", serif;
+  --f-sans: "Jost", sans-serif;
+
   /* Tamaños base */
   --fs-base: 1rem;
   --fs-sm: 0.875rem;
@@ -37,13 +37,13 @@
   --fs-4xl: 2.25rem;
   --fs-5xl: 3rem;
   --fs-6xl: 3.75rem;
-  
+
   /* Line heights */
   --lh-tight: 1.2;
   --lh-normal: 1.5;
   --lh-relaxed: 1.6;
   --lh-loose: 1.8;
-  
+
   /* Letter spacing */
   --ls-normal: 0;
   --ls-wide: 0.05em;
