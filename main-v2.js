@@ -1,4 +1,9 @@
-// ====== MOBILE MENU TOGGLE ======
+// ====== ⚙️ CONFIGURACIÓN WHATSAPP ====== 
+const WHATSAPP_CONFIG = {
+  numero: '5491150398569', // ← REEMPLAZA CON TU NÚMERO
+};
+
+// ====== MOBILE MENU TOGGLE ====== 
 const navToggle = document.getElementById('nav-toggle');
 const navLinks = document.getElementById('nav-links');
 
@@ -8,7 +13,6 @@ if (navToggle && navLinks) {
     navLinks.classList.toggle('active');
   });
 
-  // Close menu when link is clicked
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navToggle.classList.remove('active');
@@ -17,17 +21,17 @@ if (navToggle && navLinks) {
   });
 }
 
-// ====== SMOOTH SCROLL ======
+// ====== SMOOTH SCROLL ====== 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
     const target = document.querySelector(href);
-
+    
     if (target) {
       e.preventDefault();
-      const navHeight = document.querySelector('.navbar').offsetHeight;
+      const navHeight = document.querySelector('.navbar')?.offsetHeight || 60;
       const targetPosition = target.offsetTop - navHeight;
-
+      
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
@@ -36,7 +40,92 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ====== REVEAL ON SCROLL ======
+// ====== VIDEO HERO CONTROLS (CON SONIDO EN SCROLL) ====== 
+const heroVideo = document.getElementById('hero-video');
+const videoPlayBtn = document.getElementById('video-play-btn');
+
+console.log('🎥 Video:', heroVideo ? '✓ Encontrado' : '❌ No encontrado');
+console.log('🔘 Botón:', videoPlayBtn ? '✓ Encontrado' : '❌ No encontrado');
+
+if (heroVideo && videoPlayBtn) {
+  // Observer para detectar cuando el video entra/sale del viewport
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Video visible en pantalla → REPRODUCIR CON SONIDO
+        console.log('📹 Video visible → reproduciendo con sonido');
+        
+        const playPromise = heroVideo.play();
+        
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log('✓ Sonido activado');
+              videoPlayBtn.textContent = '⏸';
+              heroVideo.muted = false;
+            })
+            .catch(() => {
+              console.log('⚠️ Autoplay con sonido bloqueado');
+              heroVideo.muted = true;
+              heroVideo.play();
+            });
+        }
+      } else {
+        // Video fuera de pantalla → PAUSAR Y SILENCIAR
+        console.log('🔇 Video fuera de pantalla');
+        heroVideo.pause();
+        heroVideo.muted = true;
+        videoPlayBtn.textContent = '▶';
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+  
+  videoObserver.observe(heroVideo);
+  
+  // ====== CLICK EN BOTÓN PLAY ====== 
+  videoPlayBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('🖱️ Click en botón. Estado:', heroVideo.paused ? 'pausado' : 'reproduciéndose');
+    
+    if (heroVideo.paused) {
+      const playPromise = heroVideo.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            heroVideo.muted = false;
+            videoPlayBtn.textContent = '⏸';
+            console.log('▶️ Video iniciado');
+          })
+          .catch((error) => {
+            console.log('⚠️ Error al reproducir:', error);
+            heroVideo.muted = true;
+            heroVideo.play();
+            videoPlayBtn.textContent = '🔇';
+          });
+      }
+    } else {
+      heroVideo.pause();
+      videoPlayBtn.textContent = '▶';
+      console.log('⏸️ Video pausado');
+    }
+  });
+  
+  // Escuchar eventos del video
+  heroVideo.addEventListener('pause', () => {
+    videoPlayBtn.textContent = '▶';
+  });
+  
+  heroVideo.addEventListener('play', () => {
+    videoPlayBtn.textContent = heroVideo.muted ? '🔇' : '⏸';
+  });
+}
+
+// ====== REVEAL ON SCROLL ====== 
 const reveals = document.querySelectorAll('.reveal');
 
 const revealObserver = new IntersectionObserver((entries) => {
@@ -53,67 +142,84 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 reveals.forEach(el => revealObserver.observe(el));
 
-// ====== CONTACT FORM HANDLER ======
+// ====== CONTACT FORM HANDLER (WHATSAPP) ====== 
 const contactForm = document.getElementById('contact-form');
-const whatsappNumber = '5491150398569';
 
 if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
+    
     const formData = new FormData(contactForm);
     const data = {
-      name: formData.get('name')?.trim(),
-      phone: formData.get('phone')?.trim(),
-      topic: formData.get('topic')?.trim(),
-      message: formData.get('message')?.trim(),
+      name: formData.get('name'),
+      phone: formData.get('phone'),
+      topic: formData.get('topic'),
+      message: formData.get('message'),
       entrevista: formData.get('entrevista')
     };
-
+    
     if (!validateForm(data)) {
       showAlert('Por favor completa todos los campos requeridos', 'error');
       return;
     }
+    
+    try {
+      const button = contactForm.querySelector('button[type="submit"]');
+      const originalText = button.textContent;
+      
+      button.textContent = 'Abriendo WhatsApp...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        const mensaje = `*Hola Elizabeth* 👋
 
-    const message = [
-      'Hola Elizabeth, quiero hacer una consulta.',
-      '',
-      `Nombre: ${data.name}`,
-      `Telefono / WhatsApp: ${data.phone}`,
-      `Motivo: ${data.topic}`,
-      `Entrevista previa de 5 minutos: ${formatInterview(data.entrevista)}`,
-      `Mensaje: ${data.message || 'Sin mensaje adicional.'}`
-    ].join('\n');
+Soy *${data.name}*
 
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank', 'noopener');
-    showAlert('Te redirigimos a WhatsApp para enviar la consulta', 'success');
+📞 *Mi teléfono:* ${data.phone}
+
+🎯 *Te contacto por:* ${data.topic}
+
+${data.message ? `📝 *Comentarios adicionales:*\n${data.message}\n` : ''}${data.entrevista === 'si' ? '⏰ *Sí, me gustaría una entrevista previa de 5 min*' : '⏰ *No necesito entrevista previa'}
+
+¡Gracias!`;
+        
+        const urlWhatsApp = `https://wa.me/${WHATSAPP_CONFIG.numero}?text=${encodeURIComponent(mensaje)}`;
+        window.open(urlWhatsApp, '_blank');
+        
+        showAlert('✓ Tu mensaje fue preparado en WhatsApp', 'success');
+        contactForm.reset();
+        
+        button.disabled = false;
+        button.textContent = originalText;
+      }, 500);
+      
+    } catch (error) {
+      console.error('Error:', error);
+      showAlert('Error al abrir WhatsApp', 'error');
+      
+      const button = contactForm.querySelector('button[type="submit"]');
+      button.disabled = false;
+      button.textContent = 'Enviar consulta';
+    }
   });
 }
 
-// ====== FORM VALIDATION ======
+// ====== FORM VALIDATION ====== 
 function validateForm(data) {
   if (!data.name || !data.phone || !data.topic) {
     return false;
   }
-
-  // Basic phone validation
+  
   const phoneRegex = /^[0-9\s\-\+\(\)]{10,}$/;
   if (!phoneRegex.test(data.phone)) {
-    showAlert('Por favor ingresa un telefono valido', 'error');
+    showAlert('Por favor ingresa un teléfono válido', 'error');
     return false;
   }
-
+  
   return true;
 }
 
-function formatInterview(value) {
-  if (value === 'si') return 'Si';
-  if (value === 'no') return 'No';
-  return 'No especifica';
-}
-
-// ====== ALERT HELPER ======
+// ====== ALERT HELPER ====== 
 function showAlert(message, type = 'info') {
   const alertDiv = document.createElement('div');
   alertDiv.style.cssText = `
@@ -127,18 +233,19 @@ function showAlert(message, type = 'info') {
     z-index: 1000;
     animation: slideIn 0.3s ease;
     font-size: 0.9rem;
+    max-width: 300px;
   `;
-
+  
   alertDiv.textContent = message;
   document.body.appendChild(alertDiv);
-
+  
   setTimeout(() => {
     alertDiv.style.animation = 'slideOut 0.3s ease';
     setTimeout(() => alertDiv.remove(), 300);
   }, 4000);
 }
 
-// ====== ANIMATIONS CSS ======
+// ====== ANIMATIONS CSS ====== 
 const style = document.createElement('style');
 style.textContent = `
   @keyframes slideIn {
@@ -151,7 +258,7 @@ style.textContent = `
       transform: translateX(0);
     }
   }
-
+  
   @keyframes slideOut {
     from {
       opacity: 1;
@@ -165,30 +272,30 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ====== RADIO BUTTON FIX ======
+// ====== RADIO BUTTON FIX ====== 
 const radioLabels = document.querySelectorAll('.radio-label');
 
 radioLabels.forEach(label => {
   const input = label.querySelector('input[type="radio"]');
-
+  
   label.addEventListener('click', (e) => {
     if (e.target === input) return;
-
+    
     const groupName = input.getAttribute('name');
     document.querySelectorAll(`.radio-label input[name="${groupName}"]`).forEach(radio => {
       radio.parentElement.style.background = 'white';
       radio.parentElement.style.color = 'var(--ink)';
     });
-
+    
     input.checked = true;
     label.style.background = 'var(--sage-d)';
     label.style.color = 'white';
   });
 });
 
-// ====== SCROLL TO TOP BUTTON ======
+// ====== SCROLL TO TOP BUTTON ====== 
 const scrollTopBtn = document.createElement('button');
-scrollTopBtn.innerHTML = '&uarr;';
+scrollTopBtn.innerHTML = '↑';
 scrollTopBtn.style.cssText = `
   position: fixed;
   bottom: 2rem;
@@ -229,5 +336,5 @@ scrollTopBtn.addEventListener('click', () => {
   });
 });
 
-// ====== LOG ======
-console.log('Script v2.0 cargado correctamente');
+// ====== LOG ====== 
+console.log('✓ Script v2.0 cargado correctamente');

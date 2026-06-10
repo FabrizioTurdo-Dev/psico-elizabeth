@@ -81,13 +81,21 @@
         <span class="deco-word deco-word-1">Sanar</span>
         <span class="deco-word deco-word-2">Crecer</span>
 
-        <div class="circle-deco">
-          <img src="image.png" alt="Elizabeth Orlando">
-        </div>
+        <div class="circle-deco video-container">
+          <video id="hero-video" autoplay loop playsinline class="video-hero" poster="./presentacion.webm">
+            <source src="./presentacion.webm" type="video/webm">
+            <img src="./image.png" alt="Elizabeth Orlando">
+          </video>
 
-        <p class="hero-quote">
-          Mi objetivo es que mis pacientes sean más libres, autoconscientes y, en definitiva, más felices.
-        </p>
+          <button class="video-play-btn" id="video-play-btn" aria-label="Reproducir video">
+            <span>▶</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="hero-quote">
+        Mi objetivo es que mis pacientes sean más libres, autoconscientes y, en definitiva, más felices.
+      </p>
       </div>
     </section>
 
@@ -117,7 +125,8 @@
             herramientas de la nueva medicina y psicología — en la línea del Dr. Dispenza, Villordo, Lipton y Braden —
             con técnicas de Biodescodificación, para un abordaje verdaderamente completo.</p>
 
-          <p>Mi consulta está ubicada en Ingeniero Maschwitz, dentro del Barrio Los Arenales, y brindo atención tanto presencial como virtual.</p>
+          <p>Mi consulta está ubicada en Ingeniero Maschwitz, dentro del Barrio Los Arenales, y brindo atención tanto
+            presencial como virtual.</p>
 
           <div class="about-tags">
             <span class="tag">Psicoanálisis</span>
@@ -322,7 +331,7 @@
               </div>
 
               <div class="form-group checkbox-group">
-                <p>¿Querés una entrevista previa de 5 minutos?</p>
+                <p>Solicitar breve entrevista gratuita previa</p>
                 <div class="radio-group">
                   <label class="radio-label">
                     <input type="radio" name="entrevista" value="si">
