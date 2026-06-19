@@ -4,6 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lic. Elizabeth Orlando – Psicóloga y Psicooncóloga en Ingeniero Maschwitz. Atención presencial y virtual. Psicoanálisis, Biodescodificación, Nueva Medicina." />
+  <meta name="keywords" content="psicóloga, psicooncóloga, ingeniero maschwitz, psicología, biodescodificación, psicoanálisis" />
+  <meta property="og:title" content="Lic. Elizabeth Orlando – Psicóloga" />
+  <meta property="og:description" content="Acompañamiento psicoterapéutico con más de 15 años de experiencia. Psicoanálisis, Nueva Medicina, Biodescodificación." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./image.png" />
+  <meta property="og:locale" content="es_AR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lic. Elizabeth Orlando – Psicóloga" />
+  <meta name="twitter:description" content="Acompañamiento psicoterapéutico con más de 15 años de experiencia." />
+  <link rel="icon" type="image/png" href="./image.png" />
   <title>Lic. Elizabeth Orlando – Psicóloga</title>
 
   <!-- Fonts -->
@@ -13,8 +24,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
     rel="stylesheet" />
 
-  <!-- Bootstrap 5 (solo reset, variables, grid) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="variables.css">
@@ -22,7 +32,7 @@
 </head>
 
 <body>
-  <a class="sr-only focus:not-sr-only" href="#main">Saltar al contenido</a>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <!-- NAVBAR -->
   <nav class="navbar">
@@ -53,13 +63,12 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-left">
-        <div class="hero-eyebrow">Psicóloga · Psicooncóloga</div>
+        <div class="hero-eyebrow">Psicóloga · Psicooncóloga · M.N. [47876]</div>
 
         <h1 class="hero-name">
           Lic. Elizabeth<br>
           <em>Orlando</em>
         </h1>
-
         <p class="hero-title">
           Psicoanálisis · Nueva Medicina · Biodescodificación
         </p>
@@ -82,7 +91,7 @@
         <span class="deco-word deco-word-2">Crecer</span>
 
         <div class="circle-deco video-container">
-          <video id="hero-video" muted playsinline preload="metadata" loop playsinline class="video-hero" poster="./image.png">
+          <video id="hero-video" muted playsinline preload="metadata" loop class="video-hero" poster="./image.png">
             <source src="./presentacion.webm" type="video/webm">
             <img src="./image.png" alt="Elizabeth Orlando">
           </video>
@@ -96,10 +105,15 @@
       <p class="hero-quote">
         Mi objetivo es que mis pacientes sean más libres, autoconscientes y, en definitiva, más felices.
       </p>
-      </div>
     </section>
 
-    <hr class="divider" />
+
+        <!-- RESEÑAS (Elfsight) -->
+    <section id="reseñas" class="full-section">
+      <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+      <div class="elfsight-app-33d789b9-75d5-42e7-ab75-223daf6cf4fd"></div>
+      <noscript><p class="elfsight-fallback">Activá JavaScript para ver las reseñas.</p></noscript>
+    </section>
 
     <!-- SOBRE MÍ -->
     <section id="sobre-mi" class="section-base reveal">
@@ -122,7 +136,7 @@
             formación en psicoanálisis me brinda una base profunda para comprender el mundo interno de cada persona.</p>
 
           <p>Como Psicooncóloga, acompaño a quienes atraviesan el impacto emocional de las enfermedades físicas. Integro
-            herramientas de la nueva medicina y psicología — en la línea del Dr. Dispenza, Villordo, Lipton y Braden —
+            herramientas de la nueva medicina y psicología — en la línea de los Dres. Dispenza, Villordo, Lipton y Braden —
             con técnicas de Biodescodificación, para un abordaje verdaderamente completo.</p>
 
           <p>Mi consulta está ubicada en Ingeniero Maschwitz, dentro del Barrio Los Arenales, y brindo atención tanto
@@ -271,7 +285,7 @@
             <div class="contact-details">
               <div class="contact-item">
                 <div class="contact-icon">📱</div>
-                <span>011 5039-8569</span>
+                <a href="tel:01150398569">011 5039-8569</a>
               </div>
               <div class="contact-item">
                 <div class="contact-icon">📍</div>
@@ -351,11 +365,6 @@
       </div>
     </section>
 
-    <!-- RESEÑAS (Elfsight) -->
-    <section id="reseñas" class="full-section">
-      <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-      <div class="elfsight-app-33d789b9-75d5-42e7-ab75-223daf6cf4fd"></div>
-    </section>
 
     <!-- MAPA -->
     <section id="ubicacion" class="section-base">
@@ -371,11 +380,11 @@
   <!-- FOOTER -->
   <footer>
     <p>© 2025 Lic. Elizabeth Orlando · Psicóloga · M.N. [47876] · Ingeniero Maschwitz, Buenos Aires</p>
+    <p class="privacy-notice">Al enviar el formulario aceptás el tratamiento de tus datos con fines de contacto. No compartimos información con terceros.</p>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="main-v2.js"></script>
+  <script src="main-v2.js" defer></script>
 </body>
 
 </html>

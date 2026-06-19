@@ -41,33 +41,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// ====== KEYBOARD NAV ====== 
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+    navToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+    navToggle.focus();
+  }
+});
+
 // ====== VIDEO HERO CONTROLS ====== 
 const heroVideo = document.getElementById('hero-video');
 const videoPlayBtn = document.getElementById('video-play-btn');
 
 if (heroVideo && videoPlayBtn) {
-  // Siempre iniciar muteado para evitar bloqueos del navegador
   heroVideo.muted = true;
 
   const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Reproduce automáticamente pero MUTEADO (así el navegador lo permite siempre)
-        heroVideo.play().catch(err => console.log("Autoplay interactivo retenido"));
-      } else {
+      if (!entry.isIntersecting && !heroVideo.paused) {
         heroVideo.pause();
+        videoPlayBtn.textContent = '▶';
       }
     });
   }, { threshold: 0.3 });
-  
+
   videoObserver.observe(heroVideo);
-  
-  // El botón de click es el único que puede activar el sonido de forma segura
+
   videoPlayBtn.addEventListener('click', (e) => {
     e.preventDefault();
     if (heroVideo.paused) {
       heroVideo.play();
-      heroVideo.muted = false; // Aquí sí se permite porque viene de un click explícito
+      heroVideo.muted = false;
       videoPlayBtn.textContent = '⏸';
     } else {
       heroVideo.pause();
@@ -159,95 +164,24 @@ function validateForm(data) {
 // ====== ALERT HELPER ====== 
 function showAlert(message, type = 'info') {
   const alertDiv = document.createElement('div');
-  alertDiv.style.cssText = `
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    background: ${type === 'success' ? 'var(--sage-d)' : 'var(--taupe)'};
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 0.25rem;
-    z-index: 1000;
-    animation: slideIn 0.3s ease;
-    font-size: 0.9rem;
-    max-width: 300px;
-  `;
-
+  alertDiv.className = `alert-toast alert-toast--${type}`;
   alertDiv.textContent = message;
   document.body.appendChild(alertDiv);
 
   setTimeout(() => {
-    alertDiv.style.animation = 'slideOut 0.3s ease';
+    alertDiv.classList.add('alert-toast--out');
     setTimeout(() => alertDiv.remove(), 300);
   }, 4000);
 }
 
-// ====== ANIMATIONS CSS ====== 
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(100px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes slideOut {
-    from { opacity: 1; transform: translateX(0); }
-    to { opacity: 0; transform: translateX(100px); }
-  }
-`;
-document.head.appendChild(style);
-
-// ====== RADIO BUTTON FIX ====== 
-const radioLabels = document.querySelectorAll('.radio-label');
-
-radioLabels.forEach(label => {
-  const input = label.querySelector('input[type="radio"]');
-  label.addEventListener('click', (e) => {
-    if (e.target === input) return;
-    const groupName = input.getAttribute('name');
-    document.querySelectorAll(`.radio-label input[name="${groupName}"]`).forEach(radio => {
-      radio.parentElement.style.background = 'white';
-      radio.parentElement.style.color = 'var(--ink)';
-    });
-    input.checked = true;
-    label.style.background = 'var(--sage-d)';
-    label.style.color = 'white';
-  });
-});
-
 // ====== SCROLL TO TOP BUTTON ====== 
 const scrollTopBtn = document.createElement('button');
 scrollTopBtn.innerHTML = '↑';
-scrollTopBtn.style.cssText = `
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 3rem;
-  height: 3rem;
-  background: var(--sage-d);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.5rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
+scrollTopBtn.className = 'scroll-top-btn';
 document.body.appendChild(scrollTopBtn);
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    scrollTopBtn.style.opacity = '1';
-    scrollTopBtn.style.visibility = 'visible';
-  } else {
-    scrollTopBtn.style.opacity = '0';
-    scrollTopBtn.style.visibility = 'hidden';
-  }
+  scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
 });
 
 scrollTopBtn.addEventListener('click', () => {

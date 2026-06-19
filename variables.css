@@ -13,12 +13,6 @@
   --light-sand: #f0e8dd;
   --white: #ffffff;
   --black: #000000;
-
-  /* Bootstrap overrides */
-  --bs-body-bg: var(--cream);
-  --bs-body-color: var(--ink);
-  --bs-border-color: var(--mist);
-  --bs-secondary-color: var(--sage);
 }
 
 /* ====== TIPOGRAFÍA ====== */
@@ -52,27 +46,12 @@
 }
 
 /* ====== UTILITIES GLOBALES ====== */
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-sans);
-  font-weight: 300;
-  line-height: var(--lh-relaxed);
-}
-
-/* Font families */
 .font-serif {
-  font-family: var(--font-serif);
+  font-family: var(--f-serif);
 }
 
 .font-sans {
-  font-family: var(--font-sans);
+  font-family: var(--f-sans);
 }
 
 /* Text utilities */
