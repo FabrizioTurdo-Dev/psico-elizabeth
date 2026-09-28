@@ -43,11 +43,19 @@
 
     gtag('config', 'AW-18214495046');
   </script>
-  <!-- Event snippet for formulario wpp conversion page -->
+  <!-- Event snippets for Formulario WhatsApp and Clic en teléfono (sitio) conversions -->
 <script>
 function registrarConversionWpp() {
   gtag('event', 'conversion', {
-    'send_to': 'AW-18214495046/lRtNCPOM48kcEMbGrO1D',
+    'send_to': 'AW-18214495046/aG3ACPnmqYkdEMbGrO1D',
+    'value': 1.0,
+    'currency': 'ARS'
+  });
+}
+
+function registrarConversionTelefono() {
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18214495046/k-nSCPzmqYkdEMbGrO1D',
     'value': 1.0,
     'currency': 'ARS'
   });
@@ -380,7 +388,7 @@ function registrarConversionWpp() {
                 </div>
               </div>
 
-              <button onclick="registrarConversionWpp()" type="submit" class="form-submit">Enviar consulta</button>
+              <button type="submit" class="form-submit">Enviar consulta</button>
             </form>
           </div>
         </div>

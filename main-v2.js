@@ -119,6 +119,9 @@ if (contactForm) {
       return;
     }
 
+    // Solo se registra la conversión cuando el formulario es válido
+    registrarConversionWpp();
+
     try {
       const button = contactForm.querySelector('button[type="submit"]');
       const originalText = button.textContent;
@@ -147,6 +150,13 @@ if (contactForm) {
     }
   });
 }
+
+// ====== PHONE CLICK CONVERSION ====== 
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+  link.addEventListener('click', () => {
+    registrarConversionTelefono();
+  });
+});
 
 // ====== FORM VALIDATION ====== 
 function validateForm(data) {
