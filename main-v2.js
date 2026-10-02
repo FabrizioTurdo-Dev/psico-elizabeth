@@ -158,6 +158,17 @@ document.querySelectorAll('a[href^="tel:"]').forEach(link => {
   });
 });
 
+// ====== WHATSAPP BUTTON CONVERSION ======
+const whatsappBtn = document.getElementById('whatsapp-float');
+
+if (whatsappBtn) {
+  const texto = 'Hola Elizabeth, te escribo desde tu página web.';
+  whatsappBtn.href = `https://wa.me/${WHATSAPP_CONFIG.numero}?text=${encodeURIComponent(texto)}`;
+  whatsappBtn.addEventListener('click', () => {
+    registrarConversionWhatsapp();
+  });
+}
+
 // ====== FORM VALIDATION ====== 
 function validateForm(data) {
   if (!data.name || !data.phone || !data.topic) {

@@ -1147,7 +1147,7 @@ footer {
 /* ====== SCROLL TO TOP ====== */
 .scroll-top-btn {
   position: fixed;
-  bottom: 2rem;
+  bottom: 6rem;
   right: 2rem;
   width: 3rem;
   height: 3rem;
@@ -1169,6 +1169,29 @@ footer {
 .scroll-top-btn.visible {
   opacity: 1;
   visibility: visible;
+}
+
+/* ====== WHATSAPP FLOTANTE ====== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.75rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: #25d366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+  z-index: 99;
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible {
+  transform: scale(1.08);
 }
 
 /* ====== PRIVACY NOTICE ====== */
